@@ -1,19 +1,8 @@
 import mongoose from "mongoose";
+import { config as dotenvConfig } from "dotenv";
 
-// Replace this with your MongoDB connection string
-const mongoDBConnectionString =process.env.MONGODB_URL
-  
+dotenvConfig();
 
-const connectDB = async () => {
-  try {
-    const connect = await mongoose.connect(mongoDBConnectionString, {
-      useUnifiedTopology: true,
-    });
-   
-  } catch (err) {
-    console.log(err);
-    process.exit(1);
-  }
-};
+const connection = mongoose.connect(process.env.MONGODB_URL);
 
-export default connectDB;
+export { connection };
